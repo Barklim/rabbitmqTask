@@ -11,10 +11,13 @@ const run = async () => {
 			if (!message) {
 				return;
 			}
+			console.log('Subscriber logs:');
 			console.log(message.content.toString());
 			if (message.properties.replyTo) {
+				console.log('Reply to exclusive Queue:');
 				console.log(message.properties.replyTo);
-				channel.sendToQueue(message.properties.replyTo, Buffer.from('Ответ'), { correlationId: message.properties.correlationId })
+				console.log('');
+				channel.sendToQueue(message.properties.replyTo, Buffer.from('Subscriber answer'), { correlationId: message.properties.correlationId })
 			}
 		}, {
 			noAck: true
